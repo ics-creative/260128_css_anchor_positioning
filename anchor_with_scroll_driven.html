@@ -9,6 +9,9 @@
       * {
         box-sizing: border-box;
       }
+      [v-cloak] {
+        visibility: hidden;
+      }
       body {
         margin: 0;
         min-height: 100svh;
@@ -191,7 +194,7 @@
   </head>
 
   <body>
-    <div id="app">
+    <div id="app" v-cloak>
       <div class="demo">
         <div class="swipeTabs" ref="swipeTabs">
           <div class="tabbar">
@@ -297,10 +300,9 @@
               photos: createPhotos("architecture"),
             },
           ];
-          
+
           const swipeTabs = ref(null);
-          const panelRefs = ref([]);
-          
+
           return {
             activeTabIndex,
             tabs,
