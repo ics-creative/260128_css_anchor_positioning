@@ -4,7 +4,7 @@ CSS Anchor Positioning APIを使用したタブUIのサンプル集です。
 
 ## 概要
 
-このリポジトリには、CSS Anchor Positioning APIを活用した3つのタブUIサンプルが含まれています。各サンプルでは、アンカー要素に基づいて要素を配置する機能を活用し、JavaScriptを最小限に抑えた実装を実現しています。
+このリポジトリには、CSS Anchor Positioning APIを活用した4つのタブUIサンプルが含まれています。各サンプルでは、アンカー要素に基づいて要素を配置する機能を活用し、JavaScriptを最小限に抑えた実装を実現しています。
 
 ## サンプル一覧
 
@@ -29,15 +29,26 @@ CSS Anchor Positioning APIを使用したタブUIのサンプル集です。
 スクロール駆動アニメーション（Scroll-driven Animations）とアンカーポジショニングを組み合わせたタブUIのサンプルです。
 
 - スクロール位置に応じてタブの背景が自動的に移動
+- `animation-timeline: scroll()`を使用したスクロール連動アニメーション
+- Vue.jsを使用したコンポーネント実装
+- スワイプ可能なタブコンテンツ
+
+### 4. [:target-current を使ったタブUI](./anchor_with_target_current.html)
+
+`:target-current`疑似クラスとアンカーポジショニングを組み合わせたタブUIのサンプルです。
+
+- `:target-current`疑似クラスで現在表示中のパネルに対応するタブを検出
+- `scroll-target-group: auto`を使用してスクロールマーカーグループを設定
+- スクロール位置に応じてタブの背景（座布団）が自動的に移動
 - Vue.jsを使用したコンポーネント実装
 - スワイプ可能なタブコンテンツ
 
 ## 技術スタック
 
 - HTML5
-- CSS（Anchor Positioning API、Scroll-driven Animations）
+- CSS（Anchor Positioning API、Scroll-driven Animations、`:target-current`、`scroll-target-group`）
 - JavaScript
-- Vue.js 3（`anchor_with_scroll_driven.html`のみ）
+- Vue.js 3（`anchor_with_scroll_driven.html`、`anchor_with_target_current.html`）
 
 
 ## 使い方
