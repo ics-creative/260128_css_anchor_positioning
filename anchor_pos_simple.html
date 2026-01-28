@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"/>
+  <title>アンカーポジショニング</title>
+  <style>
+    body { font-family: sans-serif; }
+
+    .tabbar {
+      position: relative;
+      display: flex;
+      gap: 8px;
+      --active-anchor: --tab-1;
+
+      /* 座布団 */
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        position-anchor: var(--active-anchor);
+        top: anchor(var(--active-anchor) top);
+        left: anchor(var(--active-anchor) left);
+        width: anchor-size(var(--active-anchor) width);
+        height: anchor-size(var(--active-anchor) height);
+        transition: all 0.3s;
+        z-index: -1;
+        /* 装飾 */
+        background: lightgray;
+        border-radius: 8px;
+      }
+
+      .tab {
+        padding: 8px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="tabbar">
+  <a href="#" class="tab" style="anchor-name: --tab-1;">ようこそ</a>
+  <a href="#" class="tab" style="anchor-name: --tab-2;">このサイトについて</a>
+  <a href="#" class="tab" style="anchor-name: --tab-3;">はじめよう</a>
+</div>
+<script>
+  document.querySelectorAll('.tab').forEach((tab, index) => {
+    tab.addEventListener('click', () => {
+      document.querySelector('.tabbar')
+          .style.setProperty('--active-anchor', `--tab-${index + 1}`);
+    });
+  });
+</script>
+</body>
+</html>

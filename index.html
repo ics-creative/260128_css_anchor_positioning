@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CSS Anchor Positioning サンプル集</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        padding: 64px 32px;
+        background: #f5f5f5;
+        font-family: sans-serif;
+      }
+
+      .container {
+        max-width: 768px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        margin: 0 0 32px;
+        font-size: 2rem;
+        font-weight: bold;
+        color: #111;
+      }
+
+      .description {
+        margin: 0 0 48px;
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #444;
+      }
+
+      .samples {
+        display: grid;
+        gap: 24px;
+      }
+
+      .sample-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 32px;
+        box-shadow: 0 4px 6px rgb(0 0 0 / 0.025);
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        transition: transform 0.2s, box-shadow 0.2s;
+
+        &:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 12px rgb(0 0 0 / 0.05);
+        }
+
+        h2 {
+          margin: 0 0 8px;
+          font-size: 1.25rem;
+          font-weight: bold;
+          color: #111;
+        }
+
+        p {
+          margin: 0 0 16px;
+          font-size: 0.875rem;
+          line-height: 1.6;
+          color: #666;
+        }
+
+        .meta {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+
+        .tag {
+          padding: 4px 12px;
+          background: #e5e7eb;
+          border-radius: 999px;
+          font-size: 0.75rem;
+          font-weight: bold;
+          color: #555;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>CSS Anchor Positioning サンプル集</h1>
+      <p class="description">
+        CSS Anchor Positioning APIを使用したタブUIのサンプル集です。各サンプルでは、アンカー要素に基づいて要素を配置する機能を活用しています。
+      </p>
+
+      <div class="samples">
+        <a href="anchor_pos_simple.html" class="sample-card">
+          <h2>シンプルなタブUI</h2>
+          <p>基本的なアンカーポジショニングを使用したシンプルなタブUIのサンプルです。</p>
+          <div class="meta">
+            <span class="tag">アンカーポジショニング</span>
+          </div>
+        </a>
+
+        <a href="anchor_pos_example.html" class="sample-card">
+          <h2>カスタムイージング付きタブUI</h2>
+          <p>カスタムイージング関数を使用した、より完成度の高いタブUIのサンプルです。</p>
+          <div class="meta">
+            <span class="tag">アニメーション</span>
+            <span class="tag">カスタムイージング</span>
+            <span class="tag">アンカーポジショニング</span>
+          </div>
+        </a>
+
+        <a href="anchor_with_scroll_driven.html" class="sample-card">
+          <h2>スクロール駆動アニメーション付きタブUI</h2>
+          <p>スクロール駆動アニメーション（Scroll-driven Animations）とアンカーポジショニングを組み合わせたタブUIのサンプルです。Vue.jsを使用しています。</p>
+          <div class="meta">
+            <span class="tag">スクロール駆動</span>
+            <span class="tag">Vue.js</span>
+            <span class="tag">アンカーポジショニング</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

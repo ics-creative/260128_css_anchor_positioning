@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>タブUI</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: #f3f4f6;
+        color: #111;
+        font-family: sans-serif;
+      }
+
+      #app {
+        display: contents;
+      }
+
+      .demo {
+        width: min(420px, 100%);
+      }
+
+      .swipeTabs {
+        width: 100%;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+
+        scrollbar-width: none;
+
+        .tabbar {
+          position: sticky;
+          top: 0;
+          left: 0;
+
+          background: #fff;
+          border-bottom: 2px solid #e5e7eb;
+          padding: 8px;
+
+          touch-action: pan-y;
+
+          .row {
+            position: relative;
+            display: flex;
+            gap: 8px;
+            white-space: nowrap;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+              &:nth-child(1) .tab {
+                anchor-name: --t1;
+              }
+              &:nth-child(2) .tab {
+                anchor-name: --t2;
+              }
+              &:nth-child(3) .tab {
+                anchor-name: --t3;
+              }
+              &:nth-child(4) .tab {
+                anchor-name: --t4;
+              }
+            }
+
+            .tab {
+              position: relative;
+              z-index: 1;
+
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              height: 36px;
+              padding: 0 16px;
+
+              border-radius: 999px;
+              text-decoration: none;
+              color: #555;
+              font-weight: bold;
+              transition: color 0.2s, transform 0.2s;
+
+              &:hover {
+                color: #111;
+                transform: translateY(-2px);
+              }
+            }
+
+            .cushion {
+              position: absolute;
+              top: 0;
+              height: 36px;
+              border-radius: 999px;
+              background: #e5e7eb;
+              pointer-events: none;
+
+              position-anchor: --t1;
+
+              left: anchor(--t1 left);
+              width: anchor-size(--t1 width);
+
+              animation: follow 1ms linear forwards;
+              animation-timeline: scroll(nearest inline);
+              animation-range: 0% 100%;
+            }
+          }
+        }
+
+        .slides {
+          display: flex;
+          flex-wrap: nowrap;
+
+          .panel {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            padding: 16px;
+            min-height: 400px;
+
+            h2 {
+              margin: 0 0 16px;
+              font-size: 1.125rem;
+              font-weight: bold;
+            }
+
+            p {
+              margin: 0 0 16px;
+              font-size: 0.875rem;
+              line-height: 1.6;
+              color: #444;
+            }
+
+            .photo-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+              gap: 12px;
+              margin-top: 16px;
+
+              .photo-item {
+                position: relative;
+                width: 100%;
+                aspect-ratio: 1;
+                border-radius: 8px;
+                overflow: hidden;
+                background: #e5e7eb;
+
+                img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  display: block;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      @keyframes follow {
+        0% {
+          left: anchor(--t1 left);
+          width: anchor-size(--t1 width);
+        }
+        33.333% {
+          left: anchor(--t2 left);
+          width: anchor-size(--t2 width);
+        }
+        66.666% {
+          left: anchor(--t3 left);
+          width: anchor-size(--t3 width);
+        }
+        100% {
+          left: anchor(--t4 left);
+          width: anchor-size(--t4 width);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="demo">
+        <div class="swipeTabs" ref="swipeTabs">
+          <div class="tabbar">
+            <ul class="row" role="tablist">
+              <li
+                v-for="(tab, index) in tabs"
+                :key="tab.id"
+                role="presentation"
+              >
+                <a
+                  class="tab"
+                  :href="`#${tab.panelId}`"
+                  role="tab"
+                  :id="tab.id"
+                  :aria-controls="tab.panelId"
+                  :aria-selected="activeTabIndex === index"
+                  >{{ tab.label }}</a
+                >
+              </li>
+              <div class="cushion"></div>
+            </ul>
+          </div>
+
+          <div class="slides">
+            <section
+              v-for="(panel, index) in panels"
+              :key="panel.id"
+              :ref="(el) => { if (el) panelRefs[index] = el }"
+              class="panel"
+              :id="panel.id"
+              role="tabpanel"
+              :aria-describedby="`tab-${index + 1}`"
+              :aria-hidden="activeTabIndex !== index"
+            >
+              <h2>{{ panel.title }}</h2>
+              <p>{{ panel.description }}</p>
+              <div class="photo-grid">
+                <div
+                  v-for="(photo, photoIndex) in panel.photos"
+                  :key="photoIndex"
+                  class="photo-item"
+                >
+                  <img :src="photo.src" alt="" loading="lazy" />
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js"
+        }
+      }
+    </script>
+    <script type="module">
+      import { createApp, ref, onMounted } from "vue";
+
+      const app = createApp({
+        setup() {
+          const activeTabIndex = ref(0);
+          
+          const createPhotos = (seed, count = 6) =>
+            Array.from({ length: count }, (_, i) => ({
+              src: `https://picsum.photos/seed/${seed}-${i + 1}/300/300`,
+            }));
+          
+          const tabs = [
+            { id: "tab-1", label: "風景", panelId: "p1" },
+            { id: "tab-2", label: "トラベル", panelId: "p2" },
+            { id: "tab-3", label: "動物", panelId: "p3" },
+            { id: "tab-4", label: "Architecture", panelId: "p4" },
+          ];
+          
+          const panels = [
+            {
+              id: "p1",
+              title: "風景写真",
+              description:
+                "美しい自然の風景を集めました。左右にスワイプして他のカテゴリーもご覧ください。",
+              photos: createPhotos("landscape"),
+            },
+            {
+              id: "p2",
+              title: "人物写真",
+              description: "ポートレート写真のコレクションです。",
+              photos: createPhotos("portrait"),
+            },
+            {
+              id: "p3",
+              title: "動物写真",
+              description:
+                "かわいい動物たちの写真です。スワイプで他のカテゴリーに移動できます。",
+              photos: createPhotos("animal"),
+            },
+            {
+              id: "p4",
+              title: "Architecture",
+              description: "モダンな建築物の写真集です。",
+              photos: createPhotos("architecture"),
+            },
+          ];
+          
+          const swipeTabs = ref(null);
+          const panelRefs = ref([]);
+          
+          return {
+            activeTabIndex,
+            tabs,
+            panels,
+            swipeTabs,
+          };
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>

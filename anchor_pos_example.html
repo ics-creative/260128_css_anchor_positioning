@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>アンカーポジショニング サンプル</title>
+    <style>
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #f5f5f5;
+        font-family: sans-serif;
+        overflow: hidden;
+
+        --ease-duration: 1.0s;
+        --ease-elastic-out: linear(0, 0.1116, 0.216, 0.313, 0.4026, 0.485, 0.5602, 0.6286, 0.6904, 0.746, 0.7955, 0.8396, 0.8783, 0.9123, 0.9418, 0.9672, 0.9888, 1.0071, 1.0222, 1.0346, 1.0446, 1.0524, 1.0582, 1.0624, 1.0651, 1.0666, 1.067, 1.0665, 1.0653, 1.0635, 1.0611, 1.0584, 1.0555, 1.0523, 1.049, 1.0456, 1.0422, 1.0389, 1.0356, 1.0324, 1.0293, 1.0264, 1.0236, 1.021, 1.0186, 1.0163, 1.0142, 1.0122, 1.0105, 1.0089, 1.0074, 1.0061, 1.0049, 1.0039, 1.003, 1.0022, 1.0015, 1.0009, 1.0003, 0.9999, 0.9995, 0.9992, 0.999, 0.9988, 0.9987, 0.9986, 0.9985, 0.9985, 0.9984, 0.9985, 0.9985, 0.9985, 0.9986, 0.9986, 0.9987, 0.9988, 0.9989, 0.9989, 0.999, 0.9991, 0.9992, 0.9992, 0.9993, 0.9994, 0.9994, 0.9995, 0.9996, 0.9996, 0.9997, 0.9997, 0.9998, 0.9998, 0.9998, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 1, 1, 1)
+      }
+
+      .container {
+        background: #fff;
+        border-radius: 16px;
+        padding: 24px 48px;
+        box-shadow: 0 4px 6px rgb(0 0 0 / 0.025);
+
+        @media (width <= 768px) {
+          padding: 48px 24px;
+        }
+      }
+
+      .tabbar {
+        position: relative;
+        display: flex;
+        gap: 16px;
+        --active-anchor: --tab-1;
+
+        @media (width <= 768px) {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .tab {
+          position: relative;
+          z-index: 1;
+          padding: 16px 24px;
+          text-decoration: none;
+          color: #666;
+          font-weight: bold;
+          font-size: 0.875rem;
+          cursor: pointer;
+          transition: 0.1s;
+          user-select: none;
+          -webkit-user-select: none;
+          text-box: trim-both cap alphabetic;
+
+
+          @media (width <= 768px) {
+            width: fit-content;
+            text-align: center;
+          }
+
+          &:hover {
+            color: #3223b3;
+          }
+          &:active {
+            color: #3223b3;
+            scale: 0.97;
+          }
+          &.active {
+            color: #fff;
+          }
+        }
+
+        /* 座布団 */
+        &::before {
+          content: "";
+          display: block;
+          position: absolute;
+          position-anchor: var(--active-anchor);
+          top: anchor(var(--active-anchor) top);
+          left: anchor(var(--active-anchor) left);
+          width: anchor-size(var(--active-anchor) width);
+          height: anchor-size(var(--active-anchor) height);
+          background: #3223b3;
+          transition: var(--ease-duration) var(--ease-elastic-out);
+          border-radius: 999px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="tabbar">
+        <a href="#" class="tab active" style="anchor-name: --tab-1;">TOP</a>
+        <a href="#" class="tab" style="anchor-name: --tab-2;">このサイトについて</a>
+        <a href="#" class="tab" style="anchor-name: --tab-3;">はじめよう</a>
+        <a href="#" class="tab" style="anchor-name: --tab-4;">お問い合わせ</a>
+        <a href="#" class="tab" style="anchor-name: --tab-5;">サポート</a>
+      </div>
+    </div>
+    <script>
+      const tabs = document.querySelectorAll(".tab");
+      tabs.forEach((tab, i) => {
+        tab.addEventListener("click", () => {
+          document
+            .querySelector(".tabbar")
+            .style.setProperty("--active-anchor", `--tab-${i + 1}`);
+          tabs.forEach((t) => {
+            t.classList.toggle("active", t === tab);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
