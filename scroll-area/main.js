@@ -15,7 +15,7 @@ export function getSharedTabData() {
     { id: "tab-1", label: "風景", panelId: "p1" },
     { id: "tab-2", label: "トラベル", panelId: "p2" },
     { id: "tab-3", label: "動物", panelId: "p3" },
-    { id: "tab-4", label: "Architecture", panelId: "p4" },
+    { id: "tab-4", label: "建築", panelId: "p4" },
   ];
 
   const panels = [
@@ -23,26 +23,28 @@ export function getSharedTabData() {
       id: "p1",
       title: "風景写真",
       description:
-        "美しい自然の風景を集めました。左右にスワイプして他のカテゴリーもご覧ください。",
+        "美しい自然の風景を集めました。スワイプで他のカテゴリーもどうぞ。",
       photos: createPhotos("landscape"),
     },
     {
       id: "p2",
       title: "人物写真",
-      description: "ポートレート写真のコレクションです。",
+      description:
+        "ポートレート写真のコレクションです。人物の表情をお届けします。",
       photos: createPhotos("portrait"),
     },
     {
       id: "p3",
       title: "動物写真",
       description:
-        "かわいい動物たちの写真です。スワイプで他のカテゴリーに移動できます。",
+        "かわいい動物たちの写真です。いろんな生き物をご覧ください。",
       photos: createPhotos("animal"),
     },
     {
       id: "p4",
-      title: "Architecture",
-      description: "モダンな建築物の写真集です。",
+      title: "建築写真",
+      description:
+        "モダンな建築物の写真集です。デザインや造形をお楽しみください。",
       photos: createPhotos("architecture"),
     },
   ];
