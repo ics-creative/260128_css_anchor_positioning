@@ -24,7 +24,7 @@ CSS Anchor Positioning APIを使用したタブUIのサンプル集です。
 - レスポンシブデザイン対応
 - ホバー・アクティブ状態のスタイリング
 
-### 3. [スクロール駆動アニメーション付きタブUI](./anchor_with_scroll_driven.html)
+### 3. [スクロール駆動アニメーション付きタブUI](scroll-area/animation-timeline.html)
 
 スクロール駆動アニメーション（Scroll-driven Animations）とアンカーポジショニングを組み合わせたタブUIのサンプルです。
 
@@ -33,7 +33,7 @@ CSS Anchor Positioning APIを使用したタブUIのサンプル集です。
 - Vue.jsを使用したコンポーネント実装
 - スワイプ可能なタブコンテンツ
 
-### 4. [:target-current を使ったタブUI](./anchor_with_target_current.html)
+### 4. [:target-current を使ったタブUI](scroll-area/target-current.html)
 
 `:target-current`疑似クラスとアンカーポジショニングを組み合わせたタブUIのサンプルです。
 
