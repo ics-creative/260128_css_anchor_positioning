@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css" />
 
     <style>
-      /* animation-timeline 固有スタイル */
+      /* animation-timeline 固有スタイル（タブ文字色は黒、クッションは lightgrey） */
       .swipeTabs {
         overflow-x: auto;
         overflow-y: hidden;
@@ -16,30 +16,36 @@
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-      }
 
-      .swipeTabs .tabbar {
-        position: sticky;
-        top: 0;
-        left: 0;
-        touch-action: pan-y;
-      }
+        .tabbar {
+          position: sticky;
+          top: 0;
+          left: 0;
+          touch-action: pan-y;
 
-      .swipeTabs .tabbar .row .cushion {
-        position: absolute;
-        border-radius: 999px;
-        background: #3223b3;
-        pointer-events: none;
+          .row {
+            .cushion {
+              position: absolute;
+              border-radius: 999px;
+              background: lightgrey;
+              pointer-events: none;
 
-        position-anchor: --t1;
-        top: anchor(top);
-        left: anchor(left);
-        width: anchor-size(width);
-        height: anchor-size(height);
+              position-anchor: --t1;
+              top: anchor(top);
+              left: anchor(left);
+              width: anchor-size(width);
+              height: anchor-size(height);
 
-        animation: follow 1ms linear forwards;
-        animation-timeline: scroll(nearest inline);
-        animation-range: 0% 100%;
+              animation: follow 1ms linear forwards;
+              animation-timeline: scroll(nearest inline);
+              animation-range: 0% 100%;
+            }
+          }
+
+          .tab {
+            color: #111;
+          }
+        }
       }
 
       @keyframes follow {
@@ -67,38 +73,6 @@
           width: anchor-size(--t4 width);
           height: anchor-size(--t4 height);
         }
-      }
-
-      /* タブ文字色もスクロールに同期 */
-      .swipeTabs .tabbar .tab {
-        animation-timeline: scroll(nearest inline);
-        animation-range: 0% 100%;
-        animation-duration: 1ms;
-        animation-timing-function: linear;
-        animation-fill-mode: forwards;
-      }
-      .swipeTabs .tabbar .tab:nth-child(1) { animation-name: tab1-color; }
-      .swipeTabs .tabbar .tab:nth-child(2) { animation-name: tab2-color; }
-      .swipeTabs .tabbar .tab:nth-child(3) { animation-name: tab3-color; }
-      .swipeTabs .tabbar .tab:nth-child(4) { animation-name: tab4-color; }
-
-      @keyframes tab1-color {
-        0%, 16% { color: #fff; }
-        17%, 100% { color: #555; }
-      }
-      @keyframes tab2-color {
-        0%, 16% { color: #555; }
-        17%, 49% { color: #fff; }
-        50%, 100% { color: #555; }
-      }
-      @keyframes tab3-color {
-        0%, 49% { color: #555; }
-        50%, 82% { color: #fff; }
-        83%, 100% { color: #555; }
-      }
-      @keyframes tab4-color {
-        0%, 82% { color: #555; }
-        83%, 100% { color: #fff; }
       }
     </style>
   </head>

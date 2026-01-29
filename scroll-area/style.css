@@ -16,6 +16,7 @@ body {
   font-family: sans-serif;
   -webkit-tap-highlight-color: transparent;
   tap-highlight-color: transparent;
+  overflow: hidden;
 }
 
 #app {

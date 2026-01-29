@@ -11,46 +11,48 @@
       /* target-current 固有スタイル */
       .swipeTabs {
         overflow: hidden;
-      }
 
-      .swipeTabs .tabbar .row {
-        scroll-target-group: auto;
-      }
+        .tabbar {
+          .row {
+            scroll-target-group: auto;
 
-      .swipeTabs .tabbar .row::before {
-        content: "";
-        position: absolute;
-        border-radius: 999px;
-        background: #3223b3;
-        pointer-events: none;
-        z-index: 0;
+            &::before {
+              content: "";
+              position: absolute;
+              border-radius: 999px;
+              background: #3223b3;
+              pointer-events: none;
+              z-index: 0;
 
-        position-anchor: --current-tab;
-        top: anchor(top);
-        left: anchor(left);
-        width: anchor-size(width);
-        height: anchor-size(height);
+              position-anchor: --current-tab;
+              top: anchor(top);
+              left: anchor(left);
+              width: anchor-size(width);
+              height: anchor-size(height);
 
-        transition: top 0.3s ease, left 0.3s ease, width 0.3s ease, height 0.3s ease;
-      }
+              transition: top 0.3s ease, left 0.3s ease, width 0.3s ease, height 0.3s ease;
+            }
 
-      .swipeTabs .tabbar .tab:target-current {
-        anchor-name: --current-tab;
-        color: #fff;
-      }
+            /* デフォルト（:target-currentがない場合）は最初のタブ */
+            &:not(:has(.tab:target-current)) .tab:first-child {
+              anchor-name: --current-tab;
+            }
+          }
 
-      .swipeTabs .slides {
-        overflow-x: auto;
-        overflow-y: hidden;
-        scroll-snap-type: x mandatory;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-      }
+          .tab:target-current {
+            anchor-name: --current-tab;
+            color: #fff;
+          }
+        }
 
-      /* デフォルト（:target-currentがない場合）は最初のタブ */
-      .row:not(:has(.tab:target-current)) .tab:first-child {
-        anchor-name: --current-tab;
+        .slides {
+          overflow-x: auto;
+          overflow-y: hidden;
+          scroll-snap-type: x mandatory;
+          scroll-behavior: smooth;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+        }
       }
     </style>
   </head>
