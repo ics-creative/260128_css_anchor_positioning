@@ -28,7 +28,7 @@
       .swipeTabs .tabbar .row .cushion {
         position: absolute;
         border-radius: 999px;
-        background: #e5e7eb;
+        background: #3223b3;
         pointer-events: none;
 
         position-anchor: --t1;
@@ -67,6 +67,38 @@
           width: anchor-size(--t4 width);
           height: anchor-size(--t4 height);
         }
+      }
+
+      /* タブ文字色もスクロールに同期 */
+      .swipeTabs .tabbar .tab {
+        animation-timeline: scroll(nearest inline);
+        animation-range: 0% 100%;
+        animation-duration: 1ms;
+        animation-timing-function: linear;
+        animation-fill-mode: forwards;
+      }
+      .swipeTabs .tabbar .tab:nth-child(1) { animation-name: tab1-color; }
+      .swipeTabs .tabbar .tab:nth-child(2) { animation-name: tab2-color; }
+      .swipeTabs .tabbar .tab:nth-child(3) { animation-name: tab3-color; }
+      .swipeTabs .tabbar .tab:nth-child(4) { animation-name: tab4-color; }
+
+      @keyframes tab1-color {
+        0%, 16% { color: #fff; }
+        17%, 100% { color: #555; }
+      }
+      @keyframes tab2-color {
+        0%, 16% { color: #555; }
+        17%, 49% { color: #fff; }
+        50%, 100% { color: #555; }
+      }
+      @keyframes tab3-color {
+        0%, 49% { color: #555; }
+        50%, 82% { color: #fff; }
+        83%, 100% { color: #555; }
+      }
+      @keyframes tab4-color {
+        0%, 82% { color: #555; }
+        83%, 100% { color: #fff; }
       }
     </style>
   </head>

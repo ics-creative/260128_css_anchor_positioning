@@ -60,12 +60,17 @@ body {
     .tab {
       position: relative;
       z-index: 1;
+      user-drag: none;
+      -webkit-user-drag: none;
+      user-select: none;
+      -webkit-user-select: none;
 
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      height: 36px;
-      padding: 0 16px;
+      height: 42px;
+      font-size: 1.2rem;
+      padding: 4px 20px;
 
       border-radius: 999px;
       text-decoration: none;
@@ -74,7 +79,7 @@ body {
       transition: color 0.2s;
 
       &:hover {
-        color: #111;
+        color: #3223b3;
       }
     }
   }
