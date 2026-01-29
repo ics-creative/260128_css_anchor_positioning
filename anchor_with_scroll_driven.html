@@ -62,24 +62,8 @@
             display: flex;
             gap: 8px;
             white-space: nowrap;
-            list-style: none;
             padding: 0;
             margin: 0;
-
-            li {
-              &:nth-child(1) .tab {
-                anchor-name: --t1;
-              }
-              &:nth-child(2) .tab {
-                anchor-name: --t2;
-              }
-              &:nth-child(3) .tab {
-                anchor-name: --t3;
-              }
-              &:nth-child(4) .tab {
-                anchor-name: --t4;
-              }
-            }
 
             .tab {
               position: relative;
@@ -95,11 +79,10 @@
               text-decoration: none;
               color: #555;
               font-weight: bold;
-              transition: color 0.2s, transform 0.2s;
+              transition: color 0.2s;
 
               &:hover {
                 color: #111;
-                transform: translateY(-2px);
               }
             }
 
@@ -198,24 +181,21 @@
       <div class="demo">
         <div class="swipeTabs" ref="swipeTabs">
           <div class="tabbar">
-            <ul class="row" role="tablist">
-              <li
+            <div class="row" role="tablist">
+              <a
                 v-for="(tab, index) in tabs"
                 :key="tab.id"
-                role="presentation"
+                class="tab"
+                :href="`#${tab.panelId}`"
+                :style="{ anchorName: `--t${index + 1}` }"
+                role="tab"
+                :id="tab.id"
+                :aria-controls="tab.panelId"
+                :aria-selected="activeTabIndex === index"
+                >{{ tab.label }}</a
               >
-                <a
-                  class="tab"
-                  :href="`#${tab.panelId}`"
-                  role="tab"
-                  :id="tab.id"
-                  :aria-controls="tab.panelId"
-                  :aria-selected="activeTabIndex === index"
-                  >{{ tab.label }}</a
-                >
-              </li>
               <div class="cushion"></div>
-            </ul>
+            </div>
           </div>
 
           <div class="slides">
@@ -254,24 +234,24 @@
       }
     </script>
     <script type="module">
-      import { createApp, ref, onMounted } from "vue";
+      import { createApp, ref } from "vue";
 
       const app = createApp({
         setup() {
           const activeTabIndex = ref(0);
-          
+
           const createPhotos = (seed, count = 6) =>
             Array.from({ length: count }, (_, i) => ({
               src: `https://picsum.photos/seed/${seed}-${i + 1}/300/300`,
             }));
-          
+
           const tabs = [
             { id: "tab-1", label: "風景", panelId: "p1" },
             { id: "tab-2", label: "トラベル", panelId: "p2" },
             { id: "tab-3", label: "動物", panelId: "p3" },
             { id: "tab-4", label: "Architecture", panelId: "p4" },
           ];
-          
+
           const panels = [
             {
               id: "p1",

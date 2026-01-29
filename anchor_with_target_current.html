@@ -49,13 +49,11 @@
             display: flex;
             gap: 8px;
             white-space: nowrap;
-            list-style: none;
             padding: 0;
             margin: 0;
             scroll-target-group: auto;
 
-            /* cushionを::afterで作成 */
-            &::after {
+            &::before {
               content: "";
               position: absolute;
               top: 0;
@@ -87,11 +85,10 @@
             text-decoration: none;
             color: #555;
             font-weight: bold;
-            transition: color 0.2s, transform 0.2s;
+            transition: color 0.2s;
 
             &:hover {
               color: #111;
-              transform: translateY(-2px);
             }
 
             /* 現在表示中の要素をアンカーとして指定。クッションを移動させる */
@@ -159,7 +156,7 @@
       }
 
       /* デフォルト（:target-currentがない場合）は最初のタブ */
-      .row:not(:has(.tab:target-current)) li:first-child .tab {
+      .row:not(:has(.tab:target-current)) .tab:first-child {
         anchor-name: --current-tab;
       }
     </style>
@@ -170,23 +167,19 @@
       <div class="demo">
         <div class="swipeTabs">
           <div class="tabbar">
-            <ul class="row" role="tablist">
-              <li
+            <div class="row" role="tablist">
+              <a
                 v-for="(tab, index) in tabs"
                 :key="tab.id"
-                role="presentation"
+                class="tab"
+                :href="`#${tab.panelId}`"
+                role="tab"
+                :id="tab.id"
+                :aria-controls="tab.panelId"
+                :aria-selected="activeTabIndex === index"
+                >{{ tab.label }}</a
               >
-                <a
-                  class="tab"
-                  :href="`#${tab.panelId}`"
-                  role="tab"
-                  :id="tab.id"
-                  :aria-controls="tab.panelId"
-                  :aria-selected="activeTabIndex === index"
-                  >{{ tab.label }}</a
-                >
-              </li>
-            </ul>
+            </div>
           </div>
 
           <div class="slides">
@@ -228,19 +221,19 @@
       const app = createApp({
         setup() {
           const activeTabIndex = ref(0);
-          
+
           const createPhotos = (seed, count = 6) =>
             Array.from({ length: count }, (_, i) => ({
               src: `https://picsum.photos/seed/${seed}-${i + 1}/300/300`,
             }));
-          
+
           const tabs = [
             { id: "tab-1", label: "風景", panelId: "p1" },
             { id: "tab-2", label: "トラベル", panelId: "p2" },
             { id: "tab-3", label: "動物", panelId: "p3" },
             { id: "tab-4", label: "Architecture", panelId: "p4" },
           ];
-          
+
           const panels = [
             {
               id: "p1",
@@ -269,7 +262,7 @@
               photos: createPhotos("architecture"),
             },
           ];
-          
+
           return {
             activeTabIndex,
             tabs,
