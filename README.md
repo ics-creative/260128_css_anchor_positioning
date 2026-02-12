@@ -1,10 +1,10 @@
 # CSS Anchor Positioning サンプル集
 
-CSS Anchor Positioning APIを使用したタブUIのサンプル集です。
+CSS Anchor Positioning APIと関連仕様を使用したUIサンプル集です。
 
 ## 概要
 
-このリポジトリには、CSS Anchor Positioning APIを活用した4つのタブUIサンプルが含まれています。各サンプルでは、アンカー要素に基づいて要素を配置する機能を活用し、JavaScriptを最小限に抑えた実装を実現しています。
+このリポジトリには、CSS Anchor Positioning APIを活用した6つのサンプル（タブUI 4件、ツールチップ 2件）が含まれています。各サンプルでは、アンカー要素に基づいて要素を配置する機能を活用し、JavaScriptを最小限に抑えた実装を実現しています。
 
 ## サンプル一覧
 
@@ -43,12 +43,29 @@ CSS Anchor Positioning APIを使用したタブUIのサンプル集です。
 - Vue.jsを使用したコンポーネント実装
 - スワイプ可能なタブコンテンツ
 
+### 5. [interestfor + popover のシンプルなツールチップ](interestfor/tooltip_simple.html)
+
+`interestfor`属性と`popover`を使った最小構成のツールチップサンプルです。
+
+- リンク要素とツールチップを`interestfor`で関連付け
+- `popover`でホバー時にヒント表示
+- JavaScriptなしで実装
+
+### 6. [interestfor + Anchor Positioning の実践的なツールチップ](interestfor/tooltip.html)
+
+`interestfor`属性・Popover API・Anchor Positioning APIを組み合わせた、記事プレビュー付きツールチップのサンプルです。
+
+- アンカー位置に追従するツールチップ配置
+- `position-try`による表示位置フォールバック
+- 画像付きカードUIと開閉アニメーション
+
 ## 技術スタック
 
 - HTML5
-- CSS（Anchor Positioning API、Scroll-driven Animations、`:target-current`、`scroll-target-group`）
+- CSS（Anchor Positioning API、Scroll-driven Animations、`:target-current`、`scroll-target-group`、`position-try`）
+- HTML Popover API（`popover`、`interestfor`）
 - JavaScript
-- Vue.js 3（`anchor_with_scroll_driven.html`、`anchor_with_target_current.html`）
+- Vue.js 3（`scroll-area/animation-timeline.html`、`scroll-area/target-current.html`）
 
 
 ## 使い方
@@ -62,6 +79,6 @@ CSS Anchor Positioning APIを使用したタブUIのサンプル集です。
 ## 参考記事
 
 - [階層メニューやトーストUIが簡単に作れる新技術！　JavaScriptで利用するポップオーバーAPI](https://ics.media/entry/230530/)
-- [ツールチップの実装に役立つ！ HTMLの新属性popover="hint"の使い方](https://ics.media/entry/250417/)
+- [ツールチップの実装に役立つ！ HTMLのpopover属性の使い方](https://ics.media/entry/250417/)
 - [CSSアンカーポジショニング入門〜anchor\(\)・anchor\-size\(\)の使い方〜](https://ics.media/entry/251215/)
 - [CSSだけでスクロールアニメーションが作れる！？ 新技術Scroll\-driven Animationsとは](https://ics.media/entry/230718/)

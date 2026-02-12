@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    .info-tip {
+      width: 256px;
+      padding: 16px;
+      border: 1px solid #ccc;
+      position-area: bottom center;
+    }
+  </style>
+</head>
+<body>
+<p>
+  この文章はサンプルテキストです。ここに<a href="#"interestfor="link-1">CSSアンカーポジショニング</a>についてのリンクがあります。
+</p>
+<p>
+  さらに、<a href="#" interestfor="link-2">popover属性</a>についても詳しく説明されています。
+</p>
+
+<div id="link-1" class="info-tip" popover>
+  <h3>CSSアンカーポジショニング</h3>
+  <p>ツールチップの内容です。</p>
+</div>
+
+<div id="link-2" class="info-tip" popover>
+  <h3>popover属性</h3>
+  <p>ツールチップの内容です。</p>
+</div>
+</body>
+</html>
